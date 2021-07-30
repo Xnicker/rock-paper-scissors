@@ -1,91 +1,70 @@
-let playerScore = 0;
-let computerScore = 0;
-let playerSelection;
-let playerInput;
 
-game();
-
-function computerPlay() {
+function computerPlay() { 
     let decision = getRandomNumber(3);
-    let decisionObject;
-    console.log(decision);
-    if(decision == 1) {
-        decisionObject = "Rock";
-    }
-    else if (decision == 2) {
-        decisionObject = "Paper"
-    }
-    else if (decision == 3) {
-        decisionObject = "Scissor"
-    }
-    else {
-        decisionObject   = "SPOK";
-    }
-
-    return decisionObject;
+    return decision;
 
 }
-function getRandomNumber(max){
+function getRandomNumber(max){ //Erstellen einer zufälligen Zahl zwischen 1 & max
     return randomNumber = Math.floor((Math.random() * max)+1);
 }
 function playGround (inputPlayer, inputComputer) {
     switch (inputPlayer) {
-    case "SCHERE":
+    case "btnscissor":
         switch (inputComputer) {
-            case "Rock":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Du verlierst!`)
-                computerScore++;
-            break;
-            case "Paper":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Du gewinnst!`)
-                playerScore++;
-            break;
-            case "Scissor":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Unentschieden!`)
-            break;
+            case 1:
+                return "draw";
+            case 2:
+                return "computer";
+            case 3:
+                return "player";
+                
         }
-        break;
-    case "STEIN":
+    case "btnstone":
         switch (inputComputer) {
-            case "Rock":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Unentschieden!`)
-            break;
-            case "Paper":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Du verlierst!`)
-                computerScore++;
-            break;
-            case "Scissor":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Du gewinnst!`)
-                playerScore++;
-            break;
+            case 1:
+               return "player";
+            case 2:
+                return "draw";
+            case 3:
+                return "computer";
         }
-        break;
-    case "Papier":
+        
+    case "btnpaper":
         switch (inputComputer) {
-            case "Rock":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Du gewinnst!`)
-                playerScore++
-            break;
-            case "Paper":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Unentschieden!`)
-            break;
-            case "Scissor":
-                alert(`Du spielt ${inputPlayer} und der Computer spielt ${inputComputer}! Du verlierst!`)
-                computerScore++;
-            break;
+            case 1:
+               return "computer";
+            case 2:
+                return "player";
+            case 3:
+                return "draw";
         }
-        break;
+        
     }
 }
 
-function game () {
-    do{
-        playerSelection= prompt("Wähle zwischen Schere, Stein oder Papier!");
-        const computerSelection = computerPlay();
-        playerInput = playerSelection.toUpperCase();
-        playGround(playerInput, computerSelection);
+const buttons = document.querySelectorAll(".button");
+buttons.forEach(btn => btn.addEventListener("click", game));
+const divPlayerScore = document.querySelector("#playerscore");
+const divComputerScore = document.querySelector("#computerscore");
+const divResult = document.querySelector("#result");
+let playerScore = 0 ;
+let computerScore = 0;
+
+function game (e) {
+    let winner = playGround(e.target.id, computerPlay())
+    if (winner == "computer") {
+        computerScore++
+        divResult.innerHTML = "You lose!"
     }
-    while (playerScore <=5 &&    computerScore <= 5);
+    else if (winner =="player") {
+        playerScore++
+        divResult.innerHTML = "You win!"
+    }
+    else {
+        divResult.innerHTML="Draw!"
+    }
+    divPlayerScore.innerHTML = playerScore;
+    divComputerScore.innerHTML = computerScore;
 }
 
 

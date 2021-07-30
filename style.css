@@ -1,0 +1,85 @@
+body {
+    font-size: 14px;
+    height: 100vh;
+    width:100vw;
+    margin: 0px;
+    padding: 0px;   
+}
+form, div, button {
+    border: dotted 2px blue;
+    margin: 0px;
+    padding: 0px;
+}
+
+.button  {
+    position: relative;
+    left:Calc(50% - 25px);
+    top:Calc(50% - 10px);
+    width: 50px;
+    height:20px;
+
+}
+
+#playbox {
+    display: grid;
+    position: relative;
+    top: Calc(75VH/2);
+    left: Calc(75vw/2);
+    height:25vh;
+    width: 25vw;
+    grid-template-areas: 
+    "playerscore playerscore result result computerscore computerscore"
+    "playerscore playerscore result result computerscore computerscore"
+    "playerscore playerscore result result computerscore computerscore"
+    "scissor scissor paper paper rock rock"
+    ;
+}
+    
+#playerscore, #computerscore, #result {
+    font-size: 30px;
+    width: 1fr;
+    height: 2fr;
+    align-content: center;
+    min-width: 1fr;
+    max-width: 1fr;
+    min-height: 2fr;
+    max-height: 2fr;
+    
+}
+
+#playerscore {
+    grid-area: playerscore;
+    position: relative;
+    left:0;
+    text-align: center;
+}
+#computerscore {
+    grid-area: computerscore;
+    position: relative;
+    right: 0%;
+    text-align: center;
+}
+#result {
+    grid-area: result;
+    position: relative;
+    left: 0%;
+    text-align: center;
+    display: table-cell;
+   
+    
+}
+.divbuttons {
+    width: 1fr;
+    height: 1fr;
+    
+
+}
+#divscissor {
+    grid-area: scissor;
+}
+#divstone {
+    grid-area: rock;
+}
+#divpaper{
+    grid-area: paper; 
+}
